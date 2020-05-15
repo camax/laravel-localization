@@ -292,6 +292,11 @@ class LaravelLocalization
 
         $base_path = $this->request->getBaseUrl();
         $parsed_url = parse_url($url);
+
+        $env_base_url =  env('APP_URL');
+        $env_parsed_base_url = parse_url($env_base_url);
+        $parsed_url['host'] = $env_parsed_base_url['host'];
+        
         $url_locale = $this->getDefaultLocale();
 
         if (!$parsed_url || empty($parsed_url['path'])) {
